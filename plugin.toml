@@ -1,0 +1,14 @@
+[plugin]
+name = "fledge-plugin-env"
+version = "0.1.0"
+description = "Check, list, and diff project .env files against .env.example"
+author = "CorvidLabs"
+protocol = "fledge-v1"
+
+# No capabilities needed: this plugin reads files inside the project
+# root that's delivered in the `init` message.
+
+[[commands]]
+name = "env"
+description = "Manage and validate project .env files"
+binary = "bin/fledge-env"

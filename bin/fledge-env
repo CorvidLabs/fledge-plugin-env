@@ -1,0 +1,183 @@
+#!/usr/bin/env python3
+"""
+fledge-plugin-env
+
+Check, list, and diff project .env files against .env.example.
+Demonstrates the fledge-v1 plugin protocol with no capabilities — uses
+only the project info delivered in the `init` message.
+
+Subcommands:
+  check                      List vars in .env.example missing from .env (default)
+  list                       List variables defined in .env (keys only, never values)
+  diff                       Show keys in one but not the other
+
+Flags:
+  --example <path>           Path to example file (default: .env.example, then .env.template)
+  --env <path>               Path to env file (default: .env)
+  --json                     Machine-readable envelope output
+"""
+
+import json
+import os
+import re
+import sys
+from pathlib import Path
+
+KEY_PATTERN = re.compile(r"^\s*(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=")
+
+
+def send(msg):
+    print(json.dumps(msg), flush=True)
+
+
+def recv():
+    line = sys.stdin.readline()
+    if not line:
+        sys.exit(0)
+    return json.loads(line)
+
+
+def parse_args(args):
+    sub = "check"
+    if args and not args[0].startswith("-"):
+        sub = args[0]
+        args = args[1:]
+
+    out = {
+        "sub": sub,
+        "json": False,
+        "example": None,
+        "env": None,
+    }
+    i = 0
+    while i < len(args):
+        a = args[i]
+        if a == "--json":
+            out["json"] = True
+        elif a == "--example" and i + 1 < len(args):
+            out["example"] = args[i + 1]
+            i += 1
+        elif a == "--env" and i + 1 < len(args):
+            out["env"] = args[i + 1]
+            i += 1
+        i += 1
+    return out
+
+
+def parse_keys(path: Path):
+    """Return ordered list of keys defined in a dotenv-style file."""
+    keys = []
+    if not path.is_file():
+        return keys
+    try:
+        with path.open("r", encoding="utf-8", errors="replace") as f:
+            for line in f:
+                stripped = line.lstrip()
+                if not stripped or stripped.startswith("#"):
+                    continue
+                m = KEY_PATTERN.match(line)
+                if m:
+                    keys.append(m.group(1))
+    except OSError:
+        pass
+    return keys
+
+
+def resolve_paths(root: Path, opts):
+    if opts["example"]:
+        example = root / opts["example"]
+    else:
+        candidates = [".env.example", ".env.template", ".env.sample"]
+        example = next((root / c for c in candidates if (root / c).is_file()), root / ".env.example")
+    env = root / (opts["env"] or ".env")
+    return example, env
+
+
+def main():
+    init = recv()
+    args = init.get("args", [])
+    project = init.get("project") or {}
+    root = Path(project.get("root") or os.getcwd())
+
+    opts = parse_args(args)
+    example_path, env_path = resolve_paths(root, opts)
+
+    example_keys = parse_keys(example_path)
+    env_keys = parse_keys(env_path)
+
+    example_set = set(example_keys)
+    env_set = set(env_keys)
+
+    missing = [k for k in example_keys if k not in env_set]
+    extra = [k for k in env_keys if k not in example_set]
+
+    sub = opts["sub"]
+    payload = {
+        "schema_version": 1,
+        "action": f"env_{sub}",
+        "example_file": str(example_path.relative_to(root)) if example_path.is_file() else None,
+        "env_file": str(env_path.relative_to(root)) if env_path.is_file() else None,
+    }
+
+    if sub == "check":
+        payload.update({
+            "missing": missing,
+            "missing_count": len(missing),
+            "ok": len(missing) == 0,
+        })
+        if opts["json"]:
+            send({"type": "output", "text": json.dumps(payload) + "\n"})
+        elif not example_path.is_file():
+            send({"type": "log", "level": "warn",
+                  "message": f"No example file found ({example_path.name})"})
+            send({"type": "output", "text": "Nothing to check.\n"})
+        elif missing:
+            lines = [f"Missing in {env_path.name} ({len(missing)}):"]
+            lines += [f"  {k}" for k in missing]
+            send({"type": "output", "text": "\n".join(lines) + "\n"})
+            sys.exit(1)
+        else:
+            send({"type": "output", "text": f"OK — all {len(example_keys)} vars present.\n"})
+        return
+
+    if sub == "list":
+        payload.update({"keys": env_keys, "count": len(env_keys)})
+        if opts["json"]:
+            send({"type": "output", "text": json.dumps(payload) + "\n"})
+        elif not env_keys:
+            send({"type": "output", "text": f"No variables found in {env_path.name}.\n"})
+        else:
+            text = f"{len(env_keys)} variable(s) in {env_path.name}:\n"
+            text += "\n".join(f"  {k}" for k in env_keys) + "\n"
+            send({"type": "output", "text": text})
+        return
+
+    if sub == "diff":
+        payload.update({
+            "missing": missing,
+            "extra": extra,
+            "in_sync": not missing and not extra,
+        })
+        if opts["json"]:
+            send({"type": "output", "text": json.dumps(payload) + "\n"})
+        else:
+            lines = []
+            if missing:
+                lines.append(f"Only in {example_path.name} ({len(missing)}):")
+                lines += [f"  - {k}" for k in missing]
+            if extra:
+                lines.append(f"Only in {env_path.name} ({len(extra)}):")
+                lines += [f"  + {k}" for k in extra]
+            if not lines:
+                lines.append("In sync.")
+            send({"type": "output", "text": "\n".join(lines) + "\n"})
+            if missing or extra:
+                sys.exit(1)
+        return
+
+    send({"type": "log", "level": "error", "message": f"Unknown subcommand: {sub}"})
+    sys.exit(2)
+
+
+if __name__ == "__main__":
+    main()
