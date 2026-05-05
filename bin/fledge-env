@@ -127,6 +127,8 @@ def main():
         })
         if opts["json"]:
             send({"type": "output", "text": json.dumps(payload) + "\n"})
+            if missing:
+                sys.exit(1)
         elif not example_path.is_file():
             send({"type": "log", "level": "warn",
                   "message": f"No example file found ({example_path.name})"})
@@ -160,6 +162,8 @@ def main():
         })
         if opts["json"]:
             send({"type": "output", "text": json.dumps(payload) + "\n"})
+            if missing or extra:
+                sys.exit(1)
         else:
             lines = []
             if missing:

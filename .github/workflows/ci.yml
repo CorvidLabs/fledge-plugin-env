@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check syntax
+        run: python -m py_compile bin/fledge-env
+
+      - name: Lint with ruff
+        run: |
+          pip install ruff
+          ruff check bin/fledge-env
+
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Smoke test - check (no example file)
+        run: |
+          echo '{"args":["check"],"project":{"root":"'"$(pwd)"'"}}' \
+            | python bin/fledge-env
+
+      - name: Smoke test - check with example file
+        run: |
+          echo "DATABASE_URL=\nREDIS_URL=" > .env.example
+          echo "DATABASE_URL=postgres://localhost/db" > .env
+          echo '{"args":["check"],"project":{"root":"'"$(pwd)"'"}}' \
+            | python bin/fledge-env && exit 1 || [ $? -eq 1 ]
+
+      - name: Smoke test - list
+        run: |
+          echo "FOO=bar" > .env
+          echo '{"args":["list"],"project":{"root":"'"$(pwd)"'"}}' \
+            | python bin/fledge-env
+
+      - name: Smoke test - diff (in sync)
+        run: |
+          echo "FOO=" > .env.example
+          echo "FOO=bar" > .env
+          echo '{"args":["diff"],"project":{"root":"'"$(pwd)"'"}}' \
+            | python bin/fledge-env
+
+      - name: Smoke test - JSON output
+        run: |
+          echo "A=1" > .env.example
+          echo "A=1" > .env
+          output=$(echo '{"args":["check","--json"],"project":{"root":"'"$(pwd)"'"}}' \
+            | python bin/fledge-env)
+          echo "$output" | python -c "import sys,json; d=json.loads(json.loads(sys.stdin.read())['text']); assert d['ok']"
