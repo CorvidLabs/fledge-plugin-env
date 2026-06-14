@@ -3,14 +3,27 @@ name: CI
 on:
   push:
     branches: [main]
+    paths:
+      - bin/**
+      - plugin.toml
+      - .github/workflows/ci.yml
   pull_request:
     branches: [main]
+    paths:
+      - bin/**
+      - plugin.toml
+      - .github/workflows/ci.yml
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -27,8 +40,9 @@ jobs:
 
   smoke-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up Python
         uses: actions/setup-python@v5
