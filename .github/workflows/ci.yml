@@ -56,7 +56,7 @@ jobs:
 
       - name: Smoke test - check with example file
         run: |
-          echo "DATABASE_URL=\nREDIS_URL=" > .env.example
+          printf "DATABASE_URL=\nREDIS_URL=\n" > .env.example
           echo "DATABASE_URL=postgres://localhost/db" > .env
           echo '{"args":["check"],"project":{"root":"'"$(pwd)"'"}}' \
             | python bin/fledge-env && exit 1 || [ $? -eq 1 ]
