@@ -11,3 +11,4 @@ artifact: testing
 - Confirm no environment values appear in output
 - `specsync check --strict --force` at advisory threshold 0
 - `fledge trust doctor` and `fledge trust verify`
+- `REQ-env-003`: disposable list/JSON privacy smokes confirm environment values remain absent from output.

@@ -33,7 +33,7 @@
     "specs/"
   ],
   "verification_commands": [
-    "python3 -m py_compile bin/fledge-env && ruff check bin/fledge-env"
+    "fledge lanes run verify"
   ],
   "custom_artifacts": {},
   "principles_file": null
