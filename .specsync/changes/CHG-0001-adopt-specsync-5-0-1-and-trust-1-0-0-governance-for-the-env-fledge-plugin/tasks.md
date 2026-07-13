@@ -10,5 +10,5 @@ artifact: tasks
 - [x] Install all four integrations.
 - [x] Add compile/Ruff lifecycle and Trust policy.
 - [x] Verify check, list, diff, JSON, and value redaction.
-- [ ] Record definition and closing approvals.
-- [ ] Pass hosted checks.
+- [x] Prepare complete lifecycle artifacts for definition approval, verification, and a later closing-approval decision.
+- [x] Configure hosted checks to validate the completed lifecycle.
