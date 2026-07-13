@@ -1,0 +1,5 @@
+[registry]
+name = "fledge-plugin-env-trust-wave4"
+
+[specs]
+env = "specs/env/env.spec.md"

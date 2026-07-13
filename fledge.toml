@@ -1,0 +1,8 @@
+# fledge.toml: project task definitions
+[tasks]
+compile = "python3 -m py_compile bin/fledge-env"
+lint = "ruff check bin/fledge-env"
+
+[lanes.verify]
+description = "Compile-check and lint the environment plugin"
+steps = ["compile", "lint"]
