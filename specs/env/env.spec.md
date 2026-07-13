@@ -1,6 +1,6 @@
 ---
 module: env
-version: 1
+version: 2
 status: active
 files:
   - bin/fledge-env
@@ -61,3 +61,5 @@ Then it reports only `REDIS_URL` as missing, never prints the database value, an
 | Version | Date | Changes |
 |---------|------|---------|
 | 1 | 2026-07-12 | Document existing environment key comparison and privacy behavior for SpecSync 5 adoption. |
+| 2 | 2026-07-13 | Reconciled existing privacy documentation and stable requirement IDs for SpecSync 5.0.1 governance; runtime behavior is unchanged. |
+| 2026-07-13 | CHG-0001-adopt-specsync-5-0-1-and-trust-1-0-0-governance-for-the-env-fledge-plugin: Adopt SpecSync 5.0.1 and Trust 1.0.0 governance for the Env Fledge plugin |

@@ -21,6 +21,9 @@ Check and diff SHALL exit non-zero when their key sets are not satisfied or sync
 
 List and all JSON/human output SHALL expose key names only and never environment values.
 
+Acceptance Criteria
+- Existing list, JSON, and privacy smokes confirm values remain redacted without changing runtime behavior.
+
 ### REQ-env-004
 
 JSON mode SHALL report schema version, action, file paths, relevant key lists/counts, and status.

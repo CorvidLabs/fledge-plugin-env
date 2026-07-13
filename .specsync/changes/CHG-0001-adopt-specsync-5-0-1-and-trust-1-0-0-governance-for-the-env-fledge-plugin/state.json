@@ -5,10 +5,10 @@
   "title": "Adopt SpecSync 5.0.1 and Trust 1.0.0 governance for the Env Fledge plugin",
   "description": "Adopt SpecSync 5.0.1 and Trust 1.0.0 governance for the Env Fledge plugin",
   "kind": "migration",
-  "state": "implementing",
+  "state": "accepted",
   "base_commit": "20c865d800513e58083d8c70edce6efd4e763a16",
   "created_at": 1783877725,
-  "updated_at": 1783953041,
+  "updated_at": 1783953068,
   "affected_specs": [
     "env"
   ],
