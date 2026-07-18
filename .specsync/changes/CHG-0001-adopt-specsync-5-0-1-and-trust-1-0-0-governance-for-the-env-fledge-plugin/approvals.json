@@ -20,6 +20,51 @@
       "timestamp": 1783953068,
       "digest": "c9c7bad952c87d3c31e4e1289398ba51651ca8bf8f1e5d34455d6aaec6fca729",
       "note": "Closing approval recorded after successful committed-head native verification with portable requirement evidence."
+    },
+    {
+      "gate": "acceptance",
+      "actor": "user:0xLeif",
+      "timestamp": 1784412134,
+      "digest": "c0cf1c035bb8aaa7e853041c3e3a6bacd6bea818b79ffb30d814c02b951ee7dd",
+      "note": "Re-acceptance with the Trust consumer pin at the released v1.1.1 immutable commit; canonical deltas were already integrated and were not replayed."
+    }
+  ],
+  "reopenings": [
+    {
+      "schema_version": 1,
+      "change_id": "CHG-0001-adopt-specsync-5-0-1-and-trust-1-0-0-governance-for-the-env-fledge-plugin",
+      "actor": "user:0xLeif",
+      "reason": "Trust consumer pin moves to the released v1.1.1 immutable commit; the Trust workflow is a governed delivery input of this change, so accepted verification is stale.",
+      "timestamp": 1784412097,
+      "from_state": "accepted",
+      "to_state": "verifying",
+      "superseded_approval": {
+        "gate": "acceptance",
+        "actor": "user:0xLeif",
+        "timestamp": 1783953068,
+        "digest": "c9c7bad952c87d3c31e4e1289398ba51651ca8bf8f1e5d34455d6aaec6fca729",
+        "note": "Closing approval recorded after successful committed-head native verification with portable requirement evidence."
+      },
+      "prior_verification": {
+        "timestamp": 1783953053,
+        "commit": "d93a0f16f255180371b48205112a99a81dda349d",
+        "contract_digest": "8dc0eaadd8a60e83d1691327919a98cc3bcc6ff92fa9321b633eee027eb916c0",
+        "workspace_digest": "6f7df0d4fe9473be0bbf8f0afa1b20e6f1498b88fbf048ba3c2ea4b1f55a3c6c",
+        "acceptance_input_digest": "8f65e116797b8d89751dcd3bc97c88f42cb6b04a31e257e0e012bfe0dadb0440",
+        "passed": true,
+        "commands": [
+          {
+            "command": "fledge lanes run verify",
+            "success": true,
+            "exit_code": 0
+          }
+        ],
+        "requirement_ids": [
+          "REQ-env-003"
+        ]
+      },
+      "stale_acceptance_input_digest": "8f65e116797b8d89751dcd3bc97c88f42cb6b04a31e257e0e012bfe0dadb0440",
+      "current_acceptance_input_digest": "3c428def03e7765f033d25eff4845ccf5976f6e9e7f7b57d29922ca7675c5ab5"
     }
   ]
 }

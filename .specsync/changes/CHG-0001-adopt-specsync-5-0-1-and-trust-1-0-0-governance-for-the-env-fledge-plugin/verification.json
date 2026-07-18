@@ -1,9 +1,184 @@
 {
-  "timestamp": 1783953053,
-  "commit": "d93a0f16f255180371b48205112a99a81dda349d",
+  "timestamp": 1784412107,
+  "commit": "c09b41b1aa40456a794af46e248e26645f1afe1c",
   "contract_digest": "8dc0eaadd8a60e83d1691327919a98cc3bcc6ff92fa9321b633eee027eb916c0",
-  "workspace_digest": "6f7df0d4fe9473be0bbf8f0afa1b20e6f1498b88fbf048ba3c2ea4b1f55a3c6c",
-  "acceptance_input_digest": "8f65e116797b8d89751dcd3bc97c88f42cb6b04a31e257e0e012bfe0dadb0440",
+  "workspace_digest": "941fa695ebe0d06929f13f8a12f1550234062ab15e44e8377da74502f47bfca2",
+  "acceptance_input_digest": "75d439db9bceb1fb21a9cc42b7eed56d3b7ba7c49d95663865ddb893bf6ab7bd",
+  "acceptance_manifest": {
+    "schema_version": 1,
+    "entries": [
+      {
+        "path": ".github/workflows/ci.yml",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "da2ddcfbcce5a9ee8e23594ba09381fb1612ec2986054f7b9745fb3bd78a015c",
+        "entry_digest": "5b1be41fe4f9a7a661e1e19481a0fbdbcb90b7be4c5100a5d8d2365973ea0ad7",
+        "owners": [
+          "@exact:delivery"
+        ]
+      },
+      {
+        "path": ".github/workflows/pages.yml",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "ee551643c79435cf219a32add9481e3d5b28030ddb526cd811873f4cfcec3420",
+        "entry_digest": "933e0e78daa3875c6ee6b1e0cc52cdac8da93f5af618b29014e9e5131f232e9a",
+        "owners": [
+          "@exact:delivery"
+        ]
+      },
+      {
+        "path": ".github/workflows/trust.yml",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "f0467d49e3e6dbb5f340b819a755c64d0cbc87122c12bf69054d94b162a446e2",
+        "entry_digest": "3eea72863ce25f9795f6fb121c1e6246e2c6d12ca89a7907a8a4a4021d711623",
+        "owners": [
+          "@exact:delivery"
+        ]
+      },
+      {
+        "path": ".specsync/.gitignore",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "a505253bd2fdfb84f8121e89e48bbc67144082b5a88f439ee6acfb45424799b0",
+        "entry_digest": "ec3b8bd021ac6ac36ddfba3d0d6b84535be8074b917e9bffa050216e422d1792",
+        "owners": [
+          "@exact:delivery"
+        ]
+      },
+      {
+        "path": ".specsync/adoption-report.json",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "9eb2e6cd15a8a966ffe2fdc21a354ea40bb94dd04a21a360f4edfea2273eb831",
+        "entry_digest": "eb040b1290e63bf53168a40951dc41d971d11742fe6ea94dab9f031a4552c983",
+        "owners": [
+          "@exact:delivery"
+        ]
+      },
+      {
+        "path": ".specsync/config.toml",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "149bf30a940e2b3e236abe112f411d29209151df0de7b565a05469c669ea94f7",
+        "entry_digest": "f93c16832cf280f2512be14c7b901a1c2220ea8f58499a4636e7998740c5c34a",
+        "owners": [
+          "@exact:delivery"
+        ]
+      },
+      {
+        "path": ".specsync/registry.toml",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "75bf61942aac5112bdada47ed1c49c5aecb1d29893285395dbc27e1466fbb960",
+        "entry_digest": "a88a887719f392898015ac396c16a5aab975e3835da6e116b8987ffda4f7bd97",
+        "owners": [
+          "@exact:delivery"
+        ]
+      },
+      {
+        "path": ".specsync/sdd.json",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "a15896fc8fc3e02ab9b07339d96274ecebe64f60f6f89818f7dcc61671eaaa18",
+        "entry_digest": "f1de6ca1f022b37245ff8ff9ec533c5ae5731589469a26936234fdbe5dcc6ba3",
+        "owners": [
+          "@exact:delivery"
+        ]
+      },
+      {
+        "path": ".specsync/version",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "23b6867924dfeb9cf532753438dc919669bf93ad88215e11c15630a4acbf4299",
+        "entry_digest": "339b5f88be30302336707baa5dab61fd4b324d04e495d3bb772cf893fb4f73bc",
+        "owners": [
+          "@exact:delivery"
+        ]
+      },
+      {
+        "path": ".trust.toml",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "678a075d6760bcb08ca42d545328ab719c9ffccc171abdc4df9e19eb51688ce4",
+        "entry_digest": "fcbd1f8be12bc8ac33a66e60c122028b64230e8181dcc8ec793c5d358f276aeb",
+        "owners": [
+          "@exact:delivery"
+        ]
+      },
+      {
+        "path": "bin/fledge-env",
+        "kind": "file",
+        "mode": 33261,
+        "payload_digest": "5e9c67fdfb2f2f49606907dd2e81c49bd32ec61b6c10e1ac6edffde0390ce63d",
+        "entry_digest": "ec1044f2f6cde382056cf67d211fed2e8768fcd94946171e5d4e6c24abdc33e4",
+        "owners": [
+          "env"
+        ]
+      },
+      {
+        "path": "fledge.toml",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "ef15d5a84d39b16f841ea2e4dad4632fd603435584986a8e1f7dabf7aa5437b6",
+        "entry_digest": "e68abf3d1b46654b2d7a7473fc3f56df3bcf755340e0c165cdd97410d4e2fbde",
+        "owners": [
+          "@exact:delivery"
+        ]
+      },
+      {
+        "path": "specs/env/context.md",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "e31fa63982ddd3664a6eb395cbc7dc1f1a56b90c344629d980e82566dd94c297",
+        "entry_digest": "f2f0849bed271faf552bdcd3dbc41bbef864aaec470fbbfdd155a30fa3547a1a",
+        "owners": [
+          "env"
+        ]
+      },
+      {
+        "path": "specs/env/env.spec.md",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "276f10f4b53b424bffbcde6b10a91148345d15945d8dd6bf605e50d45a184982",
+        "entry_digest": "312d677c04e39d071f739395f7b33fdcba11e459b4135d233aafc3e334f2dd69",
+        "owners": [
+          "env"
+        ]
+      },
+      {
+        "path": "specs/env/requirements.md",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "9e7f87ee6b174c9b5f31e65d109bae1debf9a54c3af824e788acb2874e11ddd6",
+        "entry_digest": "45b49a3d1f6e904cf9523beca6d1fd31cfe420b9cf3a9db03aa9dac736ae4c98",
+        "owners": [
+          "env"
+        ]
+      },
+      {
+        "path": "specs/env/tasks.md",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "7ea031bf56b120ef946f977b50b478b3693b454c262e2d917ebfb120bfe7d5d6",
+        "entry_digest": "bdfb3cfc5cb348342fc20f5b1fef9513da78fb5262fa3a84400fd66bbea98d93",
+        "owners": [
+          "env"
+        ]
+      },
+      {
+        "path": "specs/env/testing.md",
+        "kind": "file",
+        "mode": 33188,
+        "payload_digest": "f5e4d77759d912be197358eda4417c6dd047538a486745929f0b879b2263d241",
+        "entry_digest": "df64075e39b6a0af951c3f2caa8351bffce580331f36f595e0cf65f6f4b0bf41",
+        "owners": [
+          "env"
+        ]
+      }
+    ]
+  },
   "passed": true,
   "commands": [
     {
